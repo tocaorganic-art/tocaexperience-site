@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Button } from '@/components/ui/button.jsx'
 import { MessageCircle, Instagram, Youtube, Music, Facebook, ExternalLink, Play } from 'lucide-react'
+import IntelligentSearch from './components/IntelligentSearch.jsx'
+import AIChatbot from './components/AIChatbot.jsx'
 import './App.css'
 import backgroundImage from './assets/trancoso_background.webp'
 
 function App() {
   const [scrollY, setScrollY] = useState(0)
+  const { scrollYProgress } = useScroll()
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3])
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -14,7 +20,12 @@ function App() {
   }, [])
 
   const FloatingApps = () => (
-    <div className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50 space-y-3">
+    <motion.div 
+      className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50 space-y-3"
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 1, delay: 2 }}
+    >
       {/* WhatsApp - Interface de chat com bolhas arredondadas */}
       <a 
         href="https://wa.me/5521997731321" 
@@ -144,11 +155,16 @@ function App() {
           <div className="w-6 h-1 bg-white rounded-full"></div>
         </div>
       </a>
-    </div>
+    </motion.div>
   )
 
   const SpotifyPlayer = () => (
-    <div className="fixed bottom-4 left-4 z-50">
+    <motion.div 
+      className="fixed bottom-4 left-4 z-50"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 1, delay: 2.5 }}
+    >
       <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-4 shadow-2xl w-80 border border-gray-800">
         <div className="flex items-center space-x-3 mb-3">
           <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
@@ -199,7 +215,7 @@ function App() {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 
   return (
@@ -233,38 +249,86 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section 
+      <motion.section 
         id="home"
         className="relative h-screen flex items-center justify-center"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundAttachment: 'fixed',
+          y,
         }}
       >
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            Experiência Exclusiva em Trancoso
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Paraíso Exclusivo para Seus Eventos. Trancoso é o cenário perfeito para momentos inesquecíveis.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <span className="bg-yellow-500/20 text-yellow-300 px-4 py-2 rounded-full">Exclusividade</span>
-            <span className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full">Luxo</span>
-            <span className="bg-green-500/20 text-green-300 px-4 py-2 rounded-full">Paraíso</span>
-          </div>
-          <Button 
-            size="lg" 
-            className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 text-lg"
-            onClick={() => window.open('https://wa.me/5521997731321', '_blank')}
+        <motion.div 
+          className="absolute inset-0 bg-black/40"
+          style={{ opacity }}
+        ></motion.div>
+        <motion.div 
+          className="relative z-10 text-center text-white px-4"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
+          <motion.h1 
+            className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
           >
-            Falar no WhatsApp
-          </Button>
-        </div>
-      </section>
+            Experiência Exclusiva em Trancoso
+          </motion.h1>
+          <motion.p 
+            className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1.2 }}
+          >
+            Paraíso Exclusivo para Seus Eventos. Trancoso é o cenário perfeito para momentos inesquecíveis.
+          </motion.p>
+          <motion.div 
+            className="flex flex-wrap justify-center gap-4 mb-8"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1.4 }}
+          >
+            <motion.span 
+              className="bg-yellow-500/20 text-yellow-300 px-4 py-2 rounded-full"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Exclusividade
+            </motion.span>
+            <motion.span 
+              className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Luxo
+            </motion.span>
+            <motion.span 
+              className="bg-green-500/20 text-green-300 px-4 py-2 rounded-full"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Paraíso
+            </motion.span>
+          </motion.div>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1.6 }}
+          >
+            <Button 
+              size="lg" 
+              className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 text-lg hover:scale-105 transition-transform"
+              onClick={() => window.open('https://wa.me/5521997731321', '_blank')}
+            >
+              Falar no WhatsApp
+            </Button>
+          </motion.div>
+        </motion.div>
+      </motion.section>
 
       {/* Ethos Section */}
       <section id="ethos" className="py-20 bg-gray-900">
@@ -425,6 +489,9 @@ function App() {
         </div>
       </section>
 
+      {/* Guia Inteligente de Serviços */}
+      <IntelligentSearch />
+
       {/* Contato Section */}
       <section id="contato" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -463,9 +530,12 @@ function App() {
       {/* Spotify Player */}
       <SpotifyPlayer />
       
+      {/* AI Chatbot */}
+      <AIChatbot />
+      
       {/* Dashboard IA Button */}
       <Button 
-        className="fixed bottom-4 right-4 bg-purple-600 hover:bg-purple-700 z-50"
+        className="fixed bottom-4 right-24 bg-purple-600 hover:bg-purple-700 z-40"
         onClick={() => window.open('https://wa.me/5521997731321', '_blank')}
       >
         📊 Dashboard IA
