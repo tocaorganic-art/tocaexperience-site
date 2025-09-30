@@ -5,7 +5,16 @@ import { MessageCircle, Instagram, Youtube, Music, Facebook, ExternalLink, Play 
 import IntelligentSearch from './components/IntelligentSearch.jsx'
 import AIChatbot from './components/AIChatbot.jsx'
 import './App.css'
-import backgroundImage from './assets/trancoso_background.webp'
+import backgroundImage from './assets/trancoso_background.webp';
+import Carousel from './components/Carousel';
+
+const carouselImages = [
+  '/images/carousel/02_ethos.jpg',
+  '/images/carousel/03_trajetoria.jpg',
+  '/images/carousel/04_experiencias.jpg',
+  '/images/carousel/05_midia.jpg',
+  '/images/carousel/6d500c3a-f7c0-47bc-bfab-1e9b4abf3239.jpg',
+];
 
 function App() {
   const [scrollY, setScrollY] = useState(0)
@@ -252,17 +261,11 @@ function App() {
       <motion.section 
         id="home"
         className="relative h-screen flex items-center justify-center"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          y,
-        }}
       >
+        <Carousel images={carouselImages} />
         <motion.div 
           className="absolute inset-0 bg-black/40"
-          style={{ opacity }}
+          style={{ opacity, zIndex: 1 }}
         ></motion.div>
         <motion.div 
           className="relative z-10 text-center text-white px-4"
