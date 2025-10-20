@@ -7,7 +7,7 @@ import AIChatbot from './components/AIChatbot.jsx'
 import './App.css'
 import backgroundImage from './assets/trancoso_background.webp';
 import Carousel from './components/Carousel';
-import trancosLogo from './public/images/trancoso-experience-logo.png';
+// Logo será carregada via URL pública
 
 const carouselImages = [
   '/images/carousel/02_ethos.webp',
