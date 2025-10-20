@@ -9,11 +9,19 @@ import backgroundImage from './assets/trancoso_background.webp';
 import Carousel from './components/Carousel';
 
 const carouselImages = [
-  '/images/carousel/02_ethos.jpg',
-  '/images/carousel/03_trajetoria.jpg',
-  '/images/carousel/04_experiencias.jpg',
-  '/images/carousel/05_midia.jpg',
-  '/images/carousel/6d500c3a-f7c0-47bc-bfab-1e9b4abf3239.jpg',
+  '/images/carousel/02_ethos.webp',
+  '/images/carousel/03_trajetoria.webp',
+  '/images/carousel/04_experiencias.webp',
+  '/images/carousel/05_midia.webp',
+  '/images/carousel/6d500c3a-f7c0-47bc-bfab-1e9b4abf3239.webp',
+];
+
+const carouselAltTexts = [
+  'Ethos - Toca Experience',
+  'Trajetória - Toca Experience',
+  'Experiências - Toca Experience',
+  'Mídia - Toca Experience',
+  'Tony Monteiro - Toca Experience'
 ];
 
 function App() {
@@ -262,7 +270,7 @@ function App() {
         id="home"
         className="relative h-screen flex items-center justify-center"
       >
-        <Carousel images={carouselImages} />
+        <Carousel images={carouselImages} altTexts={carouselAltTexts} />
         <motion.div 
           className="absolute inset-0 bg-black/40"
           style={{ opacity, zIndex: 1 }}
