@@ -7,6 +7,7 @@ import AIChatbot from './components/AIChatbot.jsx'
 import './App.css'
 import backgroundImage from './assets/trancoso_background.webp';
 import Carousel from './components/Carousel';
+import trancosLogo from './public/images/trancoso-experience-logo.png';
 
 const carouselImages = [
   '/images/carousel/02_ethos.webp',
@@ -242,7 +243,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <div className="text-white font-bold text-xl">TOCA</div>
+              <img src="/images/trancoso-experience-logo.png" alt="Logotipo da Trancoso Experience" className="h-12 w-auto" />
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
